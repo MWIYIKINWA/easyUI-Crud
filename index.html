@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales</title>
+
+    <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="easyui/themes/color.css">
+    <link rel="stylesheet" type="text/css" href="easyui/demo/demo.css">
+    <script type="text/javascript" src="easyui/jquery.min.js"></script>
+    <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
+
+</head>
+<body>
+
+
+    <table id="dg" title="Item Sales Report" class="easyui-datagrid" style="width:100%;height:500px"
+            url="include/get_items.php"  url="include/search_item.php"
+            toolbar="#toolbar" pagination="true"
+            rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
+            <tr>
+                <th field="date" width="50">Date</th>
+                <th field="rct" width="50">Rct.</th>
+                <th field="description" width="50">Description</th>
+                <th field="quantity" width="50">Quantity</th>
+                <th field="unit_price" width="50">Unit Price</th>
+                <th field="total" width="50">Total Amount</th>
+                <th field="vat" width="50">Vat(18%)</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div id="toolbar">
+        <div id="tb" style="margin: 10px;">
+            <label for="">Date From: </label>
+            <input name="fromdate" id="fromdate" class="easyui-datetimebox"  style="width:30">
+            <label for="">To: </label>
+            <input name="todate" id="todate" class="easyui-datetimebox"  style="width:30">
+            <a href="javascript:void(0)"  class="easyui-linkbutton" onclick="searchByDate()">Search</a>
+            <a href="" class="easyui-linkbutton" iconCls="icon-print" style="margin-left: 10px;" onclick="window.print()">Print Report</a>
+        </div>
+
+        <div id="tb2" style="margin: 10px;">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="false" onclick="newItem()">New Item</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit"  onclick="editItem()" style="margin-left: 10px;">View / Update</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove"  onclick="destroyItem()" style="margin-left: 10px;">Delete</a>
+        <a style="margin-left: 10px;"  href="javascript:void(0)" class="easyui-linkbutton" plain="true" onclick="doSearch()">Search:</a>
+        <input id="textSearch" name="textSearch" style="width:50" class="easyui-textbox">
+        </div>
+    </div>
+
+
+    <div id="dlg" class="easyui-dialog" style="width:400px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+        <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
+            <h3>Sales Information</h3>
+            <div style="margin-bottom:10px">
+                <input name="rct" class="easyui-textbox" required="true" label="Rct:" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="description" class="easyui-textbox" required="true" label="Item:" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="quantity" class="easyui-textbox" required="true" label="Quantity:" style="width:100%">
+            </div>
+            <div style="margin-bottom:10px">
+                <input name="unit_price" class="easyui-textbox" required="true" label="Unit Price:" style="width:100%">
+            </div>
+            
+        </form>
+
+        <div id="dlg-buttons">
+            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveItem()" style="width:90px">Save</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancel</a>
+        </div>
+    </div>
+
+    
+
+    <script src="main.js" type="text/javascript"></script>
+    <script type="text/javascript" src="datagrid-export.js"></script>
+
+</body>
+</html>
